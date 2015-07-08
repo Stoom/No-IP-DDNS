@@ -72,6 +72,9 @@
   <ItemGroup>
     <Fakes Include="Fakes\mscorlib.fakes" />
   </ItemGroup>
+  <ItemGroup>
+    <Fakes Include="Fakes\ducapi.fakes" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
