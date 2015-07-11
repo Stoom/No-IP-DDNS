@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAgentTest.cs" />
+    <Compile Include="WebClientTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NoIP.DDNS\NoIP.DDNS.csproj">
@@ -71,9 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\mscorlib.fakes" />
-  </ItemGroup>
-  <ItemGroup>
-    <Fakes Include="Fakes\ducapi.fakes" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
