@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Cache;
+using NoIP.DDNS.Response;
 
 namespace NoIP.DDNS
 {
-    public class Client
+    public partial class Client
     {
         public UserAgent UserAgent { get; set; }
-        public Boolean IsRegistered {
+        public Boolean IsRegistered
+        {
             get { return !String.IsNullOrWhiteSpace(Id) && !String.IsNullOrWhiteSpace(Key); }
         }
         public String Id { get; set; }
@@ -24,6 +21,23 @@ namespace NoIP.DDNS
                 throw new ArgumentNullException("userAgent");
 
             UserAgent = userAgent;
+        }
+
+        public void Register(string username, string password)
+        {
+            using (var webClient = new WebClient())
+            {
+                webClient.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+                webClient.Headers = new WebHeaderCollection 
+                {
+                    {HttpRequestHeader.UserAgent, UserAgent.ToString()},
+                };
+                var registerUri = String.Format(REGISTER_URL_SECURE, Uri.EscapeDataString(username), Uri.EscapeDataString(password));
+                var rawResponse = webClient.DownloadString(registerUri);
+                var response = rawResponse.ParseXml<RegisterResponse>();
+                Id = response.Id;
+                Key = response.Key;
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace NoIP.DDNS.Test
 {
     [TestClass]
-    public class WebClientTest
+    public partial class WebClientTest
     {
         private UserAgent _ua = new UserAgent("DDnsTest");
         private Client _client;
@@ -27,6 +27,13 @@ namespace NoIP.DDNS.Test
             _client.Id = "TestId";
             _client.Key = "TestKey";
 
+            Assert.IsTrue(_client.IsRegistered);
+        }
+
+        [TestMethod]
+        public void RegisterClient()
+        {
+            _client.Register(_noipUsername, _noipPassword);
             Assert.IsTrue(_client.IsRegistered);
         }
     }
