@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Fakes;
+using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NoIP.DDNS;
 
 namespace NoIP.DDNS.Test
 {
