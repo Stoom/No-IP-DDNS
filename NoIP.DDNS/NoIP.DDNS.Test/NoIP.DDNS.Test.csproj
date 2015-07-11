@@ -51,6 +51,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAgentTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NoIP.DDNS\NoIP.DDNS.csproj">
+      <Project>{d82b2aa1-901c-418a-970f-b6445a1e5033}</Project>
+      <Name>NoIP.DDNS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
