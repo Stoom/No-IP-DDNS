@@ -33,7 +33,7 @@ namespace NoIP.DDNS
         {
             if (String.IsNullOrWhiteSpace(programName))
                 throw new ArgumentException();
-            ProgramName = programName;
+            _userAgent = GenerateUserAgent(programName, Assembly.GetCallingAssembly().GetName().Version);
         }
 
         private string GenerateUserAgent(string programName, Version programVersion)
