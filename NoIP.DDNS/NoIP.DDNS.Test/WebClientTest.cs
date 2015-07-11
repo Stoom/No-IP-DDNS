@@ -7,23 +7,27 @@ namespace NoIP.DDNS.Test
     public class WebClientTest
     {
         private UserAgent _ua = new UserAgent("DDnsTest");
+        private Client _client;
+
+        [TestInitialize]
+        public void InitTest()
+        {
+            _client = new Client(_ua);
+        }
 
         [TestMethod]
         public void CheckIfRegisteredAndReturnFalse()
         {
-            var client = new Client(_ua);
-            Assert.IsFalse(client.IsRegistered);
+            Assert.IsFalse(_client.IsRegistered);
         }
 
         [TestMethod]
         public void CreateClientWithCredCheckIfRegisteredAndReturnTrue()
         {
-            var client = new Client(_ua)
-                {
-                    Id = "TestId",
-                    Key = "TestKey"
-                };
-            Assert.IsTrue(client.IsRegistered);
+            _client.Id = "TestId";
+            _client.Key = "TestKey";
+
+            Assert.IsTrue(_client.IsRegistered);
         }
     }
 }
