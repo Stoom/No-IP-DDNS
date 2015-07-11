@@ -11,27 +11,19 @@ namespace NoIP.DDNS
 {
     public class Client
     {
-        protected readonly string AssemblyVersion;
-        private static readonly Assembly ddnsAssembly = Assembly.GetExecutingAssembly();
-
-        public string UserAgent
-        {
-            get { return _userAgent; }
-            set
-            {
-                _userAgent = string.Format("DDNS/{0} ({1}) {2}/{3}",
-                                            AssemblyVersion,
-                                            Environment.OSVersion)
-            }
+        public UserAgent UserAgent { get; set; }
+        public Boolean IsRegistered {
+            get { return !String.IsNullOrWhiteSpace(Id) && !String.IsNullOrWhiteSpace(Key); }
         }
+        public String Id { get; set; }
+        public String Key { get; set; }
 
-        private string _userAgent;
-
-        public Client(string userAgentName)
+        public Client(UserAgent userAgent)
         {
-            // Set assembly version
-            var version = ddnsAssembly.GetName().Version;
-            AssemblyVersion = String.Format("{0}.{1}", version.Major, version.Minor);
+            if (userAgent == null)
+                throw new ArgumentNullException("userAgent");
+
+            UserAgent = userAgent;
         }
     }
 }
