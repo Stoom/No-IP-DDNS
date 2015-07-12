@@ -4,37 +4,38 @@ using NoIP.DDNS.DTO;
 
 namespace NoIP.DDNS.Response
 {
-    [Serializable, XmlRoot("client")]
+    [Serializable, XmlRoot("noip_host_list")]
     public class SettingsResponse
     {
-        public NoipHostListDomain Domain { get; set; }
-        [XmlAttribute]
+        [XmlElementAttribute("domain")]
+        public NoipHostListDomain[] Domain { get; set; }
+        [XmlAttribute("email")]
         public string Email { get; set; }
-        [XmlAttribute]
+        [XmlAttribute("enhanced")]
         public bool Enhanced { get; set; }
-        [XmlAttribute]
+        [XmlAttribute("webserver")]
         public string Webserver { get; set; }
+    }
 
-        [Serializable]
-        public class NoipHostListDomain
-        {
-            [XmlElement("host")]
-            public NoipHostListDomainHost[] Host { get; set; }
-            [XmlAttribute]
-            public string Name { get; set; }
-            [XmlAttribute]
-            public ZoneType Type { get; set; }
-        }
+    [Serializable, XmlRoot("domain")]
+    public class NoipHostListDomain
+    {
+        [XmlElement("host")]
+        public NoipHostListDomainHost[] Host { get; set; }
+        [XmlAttribute("name")]
+        public string Name { get; set; }
+        [XmlAttribute("type")]
+        public ZoneType Type { get; set; }
+    }
 
-        [Serializable]
-        public class NoipHostListDomainHost
-        {
-            [XmlAttribute]
-            public string Name { get; set; }
-            [XmlAttribute]
-            public string Group { get; set; }
-            [XmlAttribute]
-            public bool Wildcard { get; set; }
-        }
+    [Serializable, XmlRoot("host")]
+    public class NoipHostListDomainHost
+    {
+        [XmlAttribute("name")]
+        public string Name { get; set; }
+        [XmlAttribute("group")]
+        public string Group { get; set; }
+        [XmlAttribute("wildcard")]
+        public bool Wildcard { get; set; }
     }
 }

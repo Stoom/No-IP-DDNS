@@ -29,7 +29,7 @@ namespace NoIP.DDNS
             UserAgent = userAgent;
         }
 
-        protected Dictionary<Zone, ISet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>(); 
+        //protected Dictionary<Zone, ISet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>(); 
 
         public void Register(string username, string password)
         {
@@ -64,16 +64,22 @@ namespace NoIP.DDNS
 
         public ISet<Zone> GetZones()
         {
+            SettingsResponse response;
             using (var client = new WebClient())
             {
                 InitializeWebClient(client);
                 var settingsUri = String.Format(SETTINGS_URL_SECURE, Id);
                 settingsUri += String.Format("&pass={0}", GenerateQueryStringPassword(settingsUri));
                 var rawResponse = client.DownloadString(settingsUri);
-                var response = rawResponse.ParseXml<SettingsResponse>();
+                response = rawResponse.ParseXml<SettingsResponse>();
             }
 
-            throw new NotImplementedException();
+            var results = new HashSet<Zone>();
+            foreach (var zone in response.Domain)
+            {
+                results.Add(new Zone(zone.Name, zone.Type));
+            }
+            return results;
         }
 
         protected string GenerateQueryStringPassword(string url)

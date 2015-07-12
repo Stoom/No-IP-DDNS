@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Fakes;
+using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NoIP.DDNS.DTO;
 using NoIP.DDNS.Exceptions;
@@ -56,12 +59,28 @@ namespace NoIP.DDNS.Test
 
             Assert.IsTrue(_client.IsRegistered);
 
-            var results = _client.GetZones();
-
-            var expectedResults = new HashSet<Zone>
+            using (ShimsContext.Create())
             {
-                new Zone { Name = "NoIPDDNS", Type = ZoneType.Plus}
-            };
+                ShimWebClient.AllInstances.DownloadStringString = (client, s) =>
+@"
+<?xml version=""1.0"" ?>
+<noip_host_list email=""fakeEmail"" enhanced=""false"" webserver="""">
+	<domain name=""NoIPDDNS"" type=""plus"">
+		<host name=""stoom"" group="""" wildcard=""false"" ></host>
+	</domain>
+</noip_host_list>
+";
+
+                var results = _client.GetZones() as HashSet<Zone>;
+
+                var expectedResults = new HashSet<Zone>
+                {
+                    new Zone("NoIPDDNS", ZoneType.Plus)
+                };
+
+                Assert.IsNotNull(results);
+                Assert.IsTrue(expectedResults.SequenceEqual(results));
+            }
         }
     }
 }
