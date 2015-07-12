@@ -71,6 +71,10 @@ namespace NoIP.DDNS
                 var settingsUri = String.Format(SETTINGS_URL_SECURE, Id);
                 settingsUri += String.Format("&pass={0}", GenerateQueryStringPassword(settingsUri));
                 var rawResponse = client.DownloadString(settingsUri);
+
+                if (rawResponse.ToUpperInvariant() == "BAD PASSWORD")
+                    throw new InvalidLoginException("Incorrect password or client is not registered correctly.");
+
                 response = rawResponse.ParseXml<SettingsResponse>();
             }
 
