@@ -61,6 +61,7 @@
     <Compile Include="UserAgentTest.cs" />
     <Compile Include="WebClientTest.Credentials.cs" />
     <Compile Include="WebClientTest.cs" />
+    <Compile Include="WebClientTest.Hosts.cs" />
     <Compile Include="WebClientTest.Zones.cs" />
   </ItemGroup>
   <ItemGroup>

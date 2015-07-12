@@ -29,7 +29,7 @@ namespace NoIP.DDNS
             UserAgent = userAgent;
         }
 
-        //protected Dictionary<Zone, ISet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>(); 
+        protected Dictionary<Zone, HashSet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>(); 
 
         public void Register(string username, string password)
         {
@@ -78,12 +78,23 @@ namespace NoIP.DDNS
                 response = rawResponse.ParseXml<SettingsResponse>();
             }
 
-            var results = new HashSet<Zone>();
+            CachedZonesAndHosts.Clear();
             foreach (var zone in response.Domain)
             {
-                results.Add(new Zone(zone.Name, zone.Type));
+                var hosts = new HashSet<Host>();
+                foreach (var host in zone.Host)
+                {
+                    hosts.Add(new Host(host.Name) {Wildcard = host.Wildcard});
+                }
+                CachedZonesAndHosts.Add(new Zone(zone.Name, zone.Type), hosts);
             }
-            return results;
+            return new HashSet<Zone>(CachedZonesAndHosts.Keys);
+        }
+
+        public ISet<Host> GetHosts(Zone zone)
+        {
+            GetZones();
+            return CachedZonesAndHosts[zone];
         }
 
         protected string GenerateQueryStringPassword(string url)

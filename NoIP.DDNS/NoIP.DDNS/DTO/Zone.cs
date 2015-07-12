@@ -34,9 +34,9 @@ namespace NoIP.DDNS.DTO
             if (other == null)
                 return false;
 
-            var equals = false;
-            equals |= Name.Equals(other.Name);
-            equals |= Type.Equals(other.Type);
+            var equals = true;
+            equals &= Name.Equals(other.Name);
+            equals &= Type.Equals(other.Type);
             return equals;
         }
     }
