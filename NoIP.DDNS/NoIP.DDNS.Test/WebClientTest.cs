@@ -44,5 +44,16 @@ namespace NoIP.DDNS.Test
         {
             _client.Register("BadUser", "BadPassword");
         }
+
+        [TestMethod]
+        public void ReturnZonesAndHosts()
+        {
+            _client.Id = _noipClientId;
+            _client.Key = _noipClientKey;
+
+            Assert.IsTrue(_client.IsRegistered);
+
+            var results = _client.GetZones
+        }
     }
 }
