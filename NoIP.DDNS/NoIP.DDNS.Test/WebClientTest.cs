@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Fakes;
 using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NoIP.DDNS.DTO;
 using NoIP.DDNS.Exceptions;
-using NoIP.DDNS.Response;
 
 namespace NoIP.DDNS.Test
 {
@@ -66,7 +64,7 @@ namespace NoIP.DDNS.Test
 <?xml version=""1.0"" ?>
 <noip_host_list email=""fakeEmail"" enhanced=""false"" webserver="""">
 	<domain name=""NoIPDDNS"" type=""plus"">
-		<host name=""stoom"" group="""" wildcard=""false"" ></host>
+		<host name=""Host1"" group="""" wildcard=""false"" ></host>
 	</domain>
 </noip_host_list>
 ";
