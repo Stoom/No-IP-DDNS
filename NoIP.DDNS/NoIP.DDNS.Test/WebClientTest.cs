@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Net.Fakes;
+using Microsoft.QualityTools.Testing.Fakes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NoIP.DDNS.Exceptions;
 
 namespace NoIP.DDNS.Test
@@ -33,15 +35,34 @@ namespace NoIP.DDNS.Test
         [TestMethod]
         public void RegisterClient()
         {
-            _client.Register(_noipUsername, _noipPassword);
-            Assert.IsTrue(_client.IsRegistered);
+            using (ShimsContext.Create())
+            {
+                ShimWebClient.AllInstances.DownloadStringString = (client, s) =>
+@"
+<?xml version=""1.0""?>
+<client>
+	<id>C3A16882XXX</id>
+	<key>2dc43c0d076447fccc7c4999eTESTKEY</key>
+</client>
+";
+                _client.Register(_noipUsername, _noipPassword);
+                Assert.IsTrue(_client.IsRegistered);
+            }
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidLoginException))]
         public void RegisterClientWithBadUserAndPasswordAndReturnException()
         {
-            _client.Register("BadUser", "BadPassword");
+            using (ShimsContext.Create())
+            {
+                ShimWebClient.AllInstances.DownloadStringString = (client, s) =>
+@"
+<?xml version=""1.0""?>
+<error>incorrect password</error>
+";
+                _client.Register("BadUser", "BadPassword");
+            }
         }
     }
 }

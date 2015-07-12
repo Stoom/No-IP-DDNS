@@ -99,7 +99,7 @@ namespace NoIP.DDNS
         protected string GenerateQueryStringPassword(string url)
         {
             var uri = new Uri(url);
-            var hmacshA1 = new HMACSHA1(Encoding.ASCII.GetBytes(Key));
+            var hmacshA1 = new HMACSHA1(Encoding.ASCII.GetBytes(Key.ToLowerInvariant()));
             hmacshA1.Initialize();
             var str = Convert.ToBase64String(hmacshA1.ComputeHash(Encoding.ASCII.GetBytes(uri.PathAndQuery)));
             return Uri.EscapeDataString(string.Format("HMAC{{{0}}}", str.ToLowerInvariant()));
