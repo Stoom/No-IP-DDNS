@@ -42,8 +42,12 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Client.NoIpUri.cs" />
+    <Compile Include="Exceptions\InvalidLoginException.cs" />
+    <Compile Include="Exceptions\NoIpException.cs" />
+    <Compile Include="Exceptions\UserBannedException.cs" />
     <Compile Include="ParseExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response\ErrorResponse.cs" />
     <Compile Include="Response\RegisterResponse.cs" />
     <Compile Include="UserAgent.cs" />
   </ItemGroup>

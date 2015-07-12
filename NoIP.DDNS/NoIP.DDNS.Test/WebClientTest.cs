@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NoIP.DDNS.Exceptions;
 
 namespace NoIP.DDNS.Test
 {
@@ -35,6 +36,13 @@ namespace NoIP.DDNS.Test
         {
             _client.Register(_noipUsername, _noipPassword);
             Assert.IsTrue(_client.IsRegistered);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidLoginException))]
+        public void RegisterClientWithBadUserAndPasswordAndReturnException()
+        {
+            _client.Register("BadUser", "BadPassword");
         }
     }
 }

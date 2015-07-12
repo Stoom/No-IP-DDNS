@@ -19,7 +19,7 @@ namespace NoIP.DDNS
         public static T ParseXml<T>(this string value) where T : class
         {
             var reader = XmlReader.Create(value.Trim().ToStream(), 
-                                          new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Document });
+                                          new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Auto });
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
         }
     }

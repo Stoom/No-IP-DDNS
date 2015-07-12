@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Cache;
+using NoIP.DDNS.Exceptions;
 using NoIP.DDNS.Response;
 
 namespace NoIP.DDNS
@@ -34,9 +35,22 @@ namespace NoIP.DDNS
                 };
                 var registerUri = String.Format(REGISTER_URL_SECURE, Uri.EscapeDataString(username), Uri.EscapeDataString(password));
                 var rawResponse = webClient.DownloadString(registerUri);
-                var response = rawResponse.ParseXml<RegisterResponse>();
-                Id = response.Id;
-                Key = response.Key;
+                try
+                {
+                    var response = rawResponse.ParseXml<RegisterResponse>();
+                    Id = response.Id;
+                    Key = response.Key;
+                }
+                catch (InvalidOperationException)
+                {
+                    var response = rawResponse.ParseXml<ErrorResponse>();
+                    if (response.Error.ToUpperInvariant().Contains("BANNED"))
+                        throw new UserBannedException();
+                    if (response.Error.ToUpperInvariant().Contains("PASSWORD") ||
+                        response.Error.ToUpperInvariant().Contains("UNKNOWN"))
+                        throw new InvalidLoginException();
+                    throw new NoIpException(response.Error);
+                }
             }
         }
     }
