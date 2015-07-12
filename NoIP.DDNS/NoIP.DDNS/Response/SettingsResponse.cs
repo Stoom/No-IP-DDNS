@@ -7,7 +7,7 @@ namespace NoIP.DDNS.Response
     [Serializable, XmlRoot("noip_host_list")]
     public class SettingsResponse
     {
-        [XmlElementAttribute("domain")]
+        [XmlElement("domain")]
         public NoipHostListDomain[] Domain { get; set; }
         [XmlAttribute("email")]
         public string Email { get; set; }
