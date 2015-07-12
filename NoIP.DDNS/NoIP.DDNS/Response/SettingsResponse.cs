@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
+using NoIP.DDNS.DTO;
 
 namespace NoIP.DDNS.Response
 {
@@ -7,32 +8,32 @@ namespace NoIP.DDNS.Response
     public class SettingsResponse
     {
         public NoipHostListDomain Domain { get; set; }
-        [XmlAttribute()]
+        [XmlAttribute]
         public string Email { get; set; }
-        [XmlAttribute()]
+        [XmlAttribute]
         public bool Enhanced { get; set; }
-        [XmlAttribute()]
+        [XmlAttribute]
         public string Webserver { get; set; }
 
-        [Serializable()]
+        [Serializable]
         public class NoipHostListDomain
         {
             [XmlElement("host")]
             public NoipHostListDomainHost[] Host { get; set; }
-            [XmlAttribute()]
+            [XmlAttribute]
             public string Name { get; set; }
-            [XmlAttribute()]
-            public string Type { get; set; }
+            [XmlAttribute]
+            public ZoneType Type { get; set; }
         }
 
-        [Serializable()]
+        [Serializable]
         public class NoipHostListDomainHost
         {
-            [XmlAttribute()]
+            [XmlAttribute]
             public string Name { get; set; }
-            [XmlAttribute()]
+            [XmlAttribute]
             public string Group { get; set; }
-            [XmlAttribute()]
+            [XmlAttribute]
             public bool Wildcard { get; set; }
         }
     }

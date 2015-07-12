@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NoIP.DDNS.DTO;
 using NoIP.DDNS.Exceptions;
+using NoIP.DDNS.Response;
 
 namespace NoIP.DDNS.Test
 {
@@ -46,14 +49,19 @@ namespace NoIP.DDNS.Test
         }
 
         [TestMethod]
-        public void ReturnZonesAndHosts()
+        public void ReturnAllZones()
         {
             _client.Id = _noipClientId;
             _client.Key = _noipClientKey;
 
             Assert.IsTrue(_client.IsRegistered);
 
-            var results = _client.GetZones
+            var results = _client.GetZones();
+
+            var expectedResults = new HashSet<Zone>
+            {
+                new Zone { Name = "NoIPDDNS", Type = ZoneType.Plus}
+            };
         }
     }
 }

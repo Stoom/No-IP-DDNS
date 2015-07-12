@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Cache;
+using System.Security.Cryptography;
+using System.Text;
+using NoIP.DDNS.DTO;
 using NoIP.DDNS.Exceptions;
 using NoIP.DDNS.Response;
 
@@ -24,8 +29,11 @@ namespace NoIP.DDNS
             UserAgent = userAgent;
         }
 
+        protected Dictionary<Zone, ISet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>(); 
+
         public void Register(string username, string password)
         {
+            //TODO: Refactor
             using (var webClient = new WebClient())
             {
                 webClient.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
@@ -52,6 +60,38 @@ namespace NoIP.DDNS
                     throw new NoIpException(response.Error);
                 }
             }
+        }
+
+        public ISet<Zone> GetZones()
+        {
+            using (var client = new WebClient())
+            {
+                InitializeWebClient(client);
+                var settingsUri = String.Format(SETTINGS_URL_SECURE, Id);
+                settingsUri += String.Format("&pass={0}", GenerateQueryStringPassword(settingsUri));
+                var rawResponse = client.DownloadString(settingsUri);
+                var response = rawResponse.ParseXml<SettingsResponse>();
+            }
+
+            throw new NotImplementedException();
+        }
+
+        protected string GenerateQueryStringPassword(string url)
+        {
+            var uri = new Uri(url);
+            var hmacshA1 = new HMACSHA1(Encoding.ASCII.GetBytes(Key));
+            hmacshA1.Initialize();
+            var str = Convert.ToBase64String(hmacshA1.ComputeHash(Encoding.ASCII.GetBytes(uri.PathAndQuery)));
+            return Uri.EscapeDataString(string.Format("HMAC{{{0}}}", str.ToLowerInvariant()));
+        }
+
+        protected void InitializeWebClient(WebClient client)
+        {
+            client.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+            client.Headers = new WebHeaderCollection 
+                {
+                    {HttpRequestHeader.UserAgent, UserAgent.ToString()},
+                };
         }
     }
 }
