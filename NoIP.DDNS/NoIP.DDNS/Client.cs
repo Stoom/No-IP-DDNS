@@ -78,10 +78,10 @@ namespace NoIP.DDNS
             }
 
             CachedZonesAndHosts.Clear();
-            foreach (var zone in response.Domain)
+            foreach (var zone in response.Domains)
             {
                 var hosts = new HashSet<Host>();
-                foreach (var host in zone.Host)
+                foreach (var host in zone.Hosts)
                 {
                     hosts.Add(new Host(host.Name) {Wildcard = host.Wildcard});
                 }

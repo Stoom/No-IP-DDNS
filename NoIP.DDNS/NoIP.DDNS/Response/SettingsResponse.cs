@@ -8,7 +8,7 @@ namespace NoIP.DDNS.Response
     public class SettingsResponse
     {
         [XmlElement("domain")]
-        public NoipHostListDomain[] Domain { get; set; }
+        public NoipHostListDomain[] Domains { get; set; }
         [XmlAttribute("email")]
         public string Email { get; set; }
         [XmlAttribute("enhanced")]
@@ -21,7 +21,7 @@ namespace NoIP.DDNS.Response
     public class NoipHostListDomain
     {
         [XmlElement("host")]
-        public NoipHostListDomainHost[] Host { get; set; }
+        public NoipHostListDomainHost[] Hosts { get; set; }
         [XmlAttribute("name")]
         public string Name { get; set; }
         [XmlAttribute("type")]
