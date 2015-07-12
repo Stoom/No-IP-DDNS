@@ -73,7 +73,7 @@ namespace NoIP.DDNS
                 var rawResponse = client.DownloadString(settingsUri);
 
                 if (rawResponse.ToUpperInvariant() == "BAD PASSWORD")
-                    throw new InvalidLoginException("Incorrect password or client is not registered correctly.");
+                    throw new InvalidLoginException("Incorrect login or client is not registered correctly.");
 
                 response = rawResponse.ParseXml<SettingsResponse>();
             }

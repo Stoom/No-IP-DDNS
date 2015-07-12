@@ -105,5 +105,30 @@ namespace NoIP.DDNS.Test
                 Assert.IsTrue(expectedResults.SequenceEqual(results));
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidLoginException))]
+        public void ReturnAllZonesWithBadUserAndThrowException()
+        {
+            _client.Id = "BadUser";
+            _client.Key = "BadPass";
+
+            Assert.IsTrue(_client.IsRegistered);
+
+            using (ShimsContext.Create())
+            {
+                ShimWebClient.AllInstances.DownloadStringString = (client, s) => @"bad password";
+
+                var results = _client.GetZones() as HashSet<Zone>;
+
+                var expectedResults = new HashSet<Zone>
+                {
+                    new Zone("NoIPDDNS", ZoneType.Plus)
+                };
+
+                Assert.IsNotNull(results);
+                Assert.IsTrue(expectedResults.SequenceEqual(results));
+            }
+        }
     }
 }
