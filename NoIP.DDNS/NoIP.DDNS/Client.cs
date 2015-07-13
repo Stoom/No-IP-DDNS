@@ -96,6 +96,33 @@ namespace NoIP.DDNS
             return CachedZonesAndHosts[zone];
         }
 
+        public void UpdateHost(Host host)
+        {
+            if (host == null)
+                throw new ArgumentNullException("host");
+            if (host.Address == null)
+                throw new ArgumentException("IP Address is not valid.");
+
+            IDictionary<string, UpdateStatus> response;
+
+            using (var client = new WebClient())
+            {
+                InitializeWebClient(client);
+                var hostQueryString = String.Format("h[]={0}", host.Name);
+                var uri = String.Format(UPDATE_URL_SECURE, Id, hostQueryString, host.Address);
+                uri += GenerateQueryStringPassword(uri);
+                var rawResponse = client.DownloadString(uri);
+                
+                //TODO: negatives
+
+                response = ParseUpdateResponse(rawResponse);
+            }
+            
+            //TODO: Check for failurs and throw accordingly
+
+            throw new NotImplementedException();
+        }
+
         protected string GenerateQueryStringPassword(string url)
         {
             var uri = new Uri(url);
@@ -112,6 +139,11 @@ namespace NoIP.DDNS
                 {
                     {HttpRequestHeader.UserAgent, UserAgent.ToString()},
                 };
+        }
+
+        private IDictionary<string, UpdateStatus> ParseUpdateResponse(string response)
+        {
+            throw new NotImplementedException();
         }
     }
 }

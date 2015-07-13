@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace NoIP.DDNS.DTO
 {
@@ -6,6 +7,7 @@ namespace NoIP.DDNS.DTO
     {
         public string Name { get; set; }
         public bool Wildcard { get; set; }
+        public IPAddress Address { get; set; }
 
         public Host(string hostName)
         {
