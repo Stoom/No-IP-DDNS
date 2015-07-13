@@ -119,8 +119,6 @@ namespace NoIP.DDNS
             }
             
             //TODO: Check for failurs and throw accordingly
-
-            throw new NotImplementedException();
         }
 
         protected string GenerateQueryStringPassword(string url)
@@ -143,7 +141,8 @@ namespace NoIP.DDNS
 
         private IDictionary<string, UpdateStatus> ParseUpdateResponse(string response)
         {
-            throw new NotImplementedException();
+            //TODO: Implement this.
+            return null;
         }
     }
 }
