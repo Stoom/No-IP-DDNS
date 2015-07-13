@@ -5,7 +5,7 @@ namespace NoIP.DDNS.Test
 {
     internal static class AssertExtensions
     {
-        public static T Throws<T>(Action action) where T : Exception
+        public static T ExpectedException<T>(Action action) where T : Exception
         {
             try
             {
@@ -20,7 +20,7 @@ namespace NoIP.DDNS.Test
             return null;
         }
 
-        public static T DoesNotThrow<T>(Action action) where T : Exception
+        public static T NoExpectedException<T>(Action action) where T : Exception
         {
             try
             {
