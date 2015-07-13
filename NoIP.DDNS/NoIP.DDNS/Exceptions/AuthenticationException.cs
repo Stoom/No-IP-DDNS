@@ -3,36 +3,36 @@
 namespace NoIP.DDNS.Exceptions
 {
     /// <summary>
-    /// Exception thrown when a No-IP user has been banned.
+    /// Exception thrown when an authentication error is incountered.
     /// </summary>
     /// <remarks>
     /// This exception does not have any custom properties, 
     /// thus it does not implement ISerializable.
     /// </remarks>
     [Serializable]
-    public class UserBannedException : AuthenticationException
+    public class AuthenticationException : NoIpException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserBannedException"/> class.
+        /// Initializes a new instance of the <see cref="AuthenticationException"/> class.
         /// </summary>
-        public UserBannedException()
+        public AuthenticationException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserBannedException"/> class.
+        /// Initializes a new instance of the <see cref="AuthenticationException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public UserBannedException(string message) : base(message)
+        public AuthenticationException(string message) : base(message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserBannedException"/> class.
+        /// Initializes a new instance of the <see cref="AuthenticationException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public UserBannedException(string message, Exception innerException) : base(message, innerException)
+        public AuthenticationException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

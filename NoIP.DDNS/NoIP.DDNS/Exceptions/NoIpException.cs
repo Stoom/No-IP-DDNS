@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace NoIP.DDNS.Exceptions
 {
@@ -33,6 +35,16 @@ namespace NoIP.DDNS.Exceptions
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">The inner exception.</param>
         public NoIpException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateException"/> class.
+        /// </summary>
+        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        /// <exception></exception>
+        protected NoIpException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

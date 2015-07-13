@@ -12,7 +12,7 @@ namespace NoIP.DDNS.Exceptions
     /// and the special serialization constructor.
     /// </remarks>
     [Serializable]
-    public class UpdateException : Exception, ISerializable
+    public class UpdateException : NoIpException, ISerializable
     {
         private readonly Dictionary<string, UpdateStatus> _hostsStatus;
 
@@ -61,9 +61,13 @@ namespace NoIP.DDNS.Exceptions
             _hostsStatus = hostsStatus;
         }
 
-        // Because this class is sealed, this constructor is private. 
-        // if this class is not sealed, this constructor should be protected.
-        private UpdateException(SerializationInfo info, StreamingContext context) : base(info, context)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateException"/> class.
+        /// </summary>
+        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        /// <exception></exception>
+        protected UpdateException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             _hostsStatus = info.GetValue("HostStatus", typeof (Dictionary<string, UpdateStatus>)) as Dictionary<string, UpdateStatus>;
         }

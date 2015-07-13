@@ -42,8 +42,10 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Client.NoIpUri.cs" />
+    <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="DTO\Host.cs" />
     <Compile Include="DTO\Zone.cs" />
+    <Compile Include="Exceptions\AuthenticationException.cs" />
     <Compile Include="Exceptions\InvalidLoginException.cs" />
     <Compile Include="Exceptions\NoIpException.cs" />
     <Compile Include="Exceptions\UpdateException.cs" />
