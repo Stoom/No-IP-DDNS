@@ -3,6 +3,7 @@ using System.Net.Fakes;
 using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NoIP.DDNS.DTO;
+using NoIP.DDNS.Exceptions;
 
 namespace NoIP.DDNS.Test
 {
@@ -22,7 +23,7 @@ namespace NoIP.DDNS.Test
 
                 var host = new Host("Host1") {Address = IPAddress.Parse("127.0.0.1")};
 
-                AssertExtensions.DoesNotThrow<UpdateException>(_client.UpdateHost(host));
+                AssertExtensions.NoExpectedException<UpdateException>(() => _client.UpdateHost(host));
             }
         }
     }
