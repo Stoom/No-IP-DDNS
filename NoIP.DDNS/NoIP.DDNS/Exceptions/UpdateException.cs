@@ -88,21 +88,6 @@ namespace NoIP.DDNS.Exceptions
         {
             get { return _hostsStatus; }
         }
-
-        /// <summary>
-        /// Gets a message that describes the current exception.
-        /// </summary>
-        /// <value></value>
-        public override string Message
-        {
-            get
-            {
-                string message = base.Message;
-                if (HostStatus != null)
-                    message += Environment.NewLine + "HostStatus: " + _hostsStatus;
-                return message;
-            }
-        }
     }
 
 }
