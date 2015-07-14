@@ -38,6 +38,13 @@ namespace NoIP.DDNS
             UpdateStatus.InvalidPassword
         };
 
+        private readonly HashSet<UpdateStatus> _authentationStatuses = new HashSet<UpdateStatus>
+        {
+            UpdateStatus.AccountDisabled,
+            UpdateStatus.ClientDisabled,
+            UpdateStatus.ClientIdTemporarilyDisabled
+        };
+
         public void Register(string username, string password)
         {
             //TODO: Refactor
@@ -138,6 +145,8 @@ namespace NoIP.DDNS
             var responseStatuses = response.Values.ToHashSet();
             if (responseStatuses.Intersect(_invalidLookupStatuses).Any())
                 throw new InvalidLoginException();
+            if (responseStatuses.Intersect(_authentationStatuses).Any())
+                throw new AuthenticationException();
         }
 
         protected string GenerateQueryStringPassword(string url)
