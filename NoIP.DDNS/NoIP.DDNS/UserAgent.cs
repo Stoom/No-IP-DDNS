@@ -38,7 +38,7 @@ namespace NoIP.DDNS
 
         private string GenerateUserAgent(string programName, Version programVersion)
         {
-            return String.Format("{0}/{1} ({2}) {3}/{4}",
+            return String.Format("{3}/{4} ({2}) {0}/{1}",
                                  LibraryName, LibraryVersion,
                                  OsVersion,
                                  programName, programVersion.ToString(2));
