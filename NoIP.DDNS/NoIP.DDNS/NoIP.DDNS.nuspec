@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>NoIP.DDNS</id>
+    <version>1.0.0.1</version>
+    <title>NoIP.DDNS</title>
+    <authors>Stoom</authors>
+    <owners>James Stumme</owners>
+    <description>Client library to No-IP dynamic DNS service</description>
+    <language />
+    <licenseUrl>https://github.com/Stoom/No-IP-DDNS/blob/develop/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Stoom/No-IP-DDNS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <developmentDependency>false</developmentDependency>
+    <releaseNotes>Initial release!</releaseNotes>
+    <copyright>Copyright ©  2015</copyright>
+  </metadata>
+  <files>
+    <file src="C:\Users\James\Source\Repos\No-IP DDNS\NoIP.DDNS\NoIP.DDNS\bin\Release\NoIP.DDNS.dll" target="lib\net45" />
+  </files>
+</package>
