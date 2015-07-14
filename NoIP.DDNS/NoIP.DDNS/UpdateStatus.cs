@@ -5,10 +5,10 @@
         IpCurrent,
         Success,
         HostNameDoesNotExist,
-        InvalidPassword,
-        InvalidUserName,
+        InvalidPassword, //Invalid Login
+        InvalidUserName, //Invalid Login
         TooManyUpdates,
-        AccountDisabled,
+        AccountDisabled, //Authentication
         InvalidIp,
         Disabled,
         HostRedirectUpdated,
@@ -17,8 +17,8 @@
         GroupIsCurrent,
         UpdateClientNotSupported,
         HostNameOfflineNotConfigured,
-        ClientIdTemporarilyDisabled = 98,
-        ClientDisabled = 99,
+        ClientIdTemporarilyDisabled = 98, //Authentication
+        ClientDisabled = 99, //Authentication
         InputError = 100,
         UnableToReadIpAddress = 50000,
     }

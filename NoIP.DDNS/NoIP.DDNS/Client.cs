@@ -32,6 +32,12 @@ namespace NoIP.DDNS
 
         protected Dictionary<Zone, HashSet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>();
 
+        private readonly HashSet<UpdateStatus> _invalidLookupStatuses = new HashSet<UpdateStatus>
+        {
+            UpdateStatus.InvalidUserName, 
+            UpdateStatus.InvalidPassword
+        };
+
         public void Register(string username, string password)
         {
             //TODO: Refactor
@@ -129,7 +135,9 @@ namespace NoIP.DDNS
                 }
             }
 
-            //TODO: Check for failurs and throw accordingly
+            var responseStatuses = response.Values.ToHashSet();
+            if (responseStatuses.Intersect(_invalidLookupStatuses).Any())
+                throw new InvalidLoginException();
         }
 
         protected string GenerateQueryStringPassword(string url)
@@ -152,15 +160,15 @@ namespace NoIP.DDNS
 
         private static IDictionary<string, UpdateStatus> ParseUpdateResponse(string response)
         {
-            var results = new Dictionary<string,UpdateStatus>();
+            var results = new Dictionary<string, UpdateStatus>();
             foreach (var hostStatus in response.Trim()
                                                .Split('\n')
                                                .Select(status => status.Split(':')))
             {
                 if (results.ContainsKey(hostStatus[0]))
-                    results[hostStatus[0]] = (UpdateStatus) Convert.ToInt32(hostStatus[1]);
+                    results[hostStatus[0]] = (UpdateStatus)Convert.ToInt32(hostStatus[1]);
                 else
-                    results.Add(hostStatus[0], (UpdateStatus) Convert.ToInt32(hostStatus[1]));
+                    results.Add(hostStatus[0], (UpdateStatus)Convert.ToInt32(hostStatus[1]));
             }
             return results;
         }

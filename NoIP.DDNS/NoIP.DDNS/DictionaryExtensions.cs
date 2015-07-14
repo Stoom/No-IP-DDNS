@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace NoIP.DDNS
 {
@@ -10,6 +11,11 @@ namespace NoIP.DDNS
             {
                 value[item.Key] = item.Value;
             }
+        }
+
+        public static HashSet<TValue> ToHashSet<TValue>(this ICollection<TValue> value)
+        {
+            return new HashSet<TValue>(value.Distinct());
         }
     }
 }

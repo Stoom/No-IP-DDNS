@@ -62,7 +62,13 @@ namespace NoIP.DDNS.Test
 
             using (ShimsContext.Create())
             {
-                ShimWebClient.AllInstances.DownloadStringString = (client, s) => "host1:1\nhost2:0\nhost3:1\nhost4:0\nhost5:1";
+                var i = -1;
+                ShimWebClient.AllInstances.DownloadStringString = (client, s) =>
+                {
+                    i = (i + 1)%3;
+                    var results = new [] { "host1:1\nhost2:0","host3:1\nhost4:0","host5:1" };
+                    return results[i];
+                };
 
                 var hosts = new List<Host>
                 {
@@ -74,6 +80,28 @@ namespace NoIP.DDNS.Test
                 };
 
                 AssertExtensions.NoExpectedException<UpdateException>(() => _client.UpdateHost(hosts));
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidLoginException))]
+        public void UpdateMultipleHostsWithBadLoginAndThrowInvalidLoginException()
+        {
+            _client.Id = "BadUser";
+            _client.Key = _noipClientKey;
+
+            Assert.IsTrue(_client.IsRegistered);
+
+            using (ShimsContext.Create())
+            {
+                ShimWebClient.AllInstances.DownloadStringString = (client, s) => ":4";
+
+                var hosts = new List<Host>
+                {
+                    new Host("host1") { Address = IPAddress.Parse("127.0.0.1") },
+                    new Host("host2") { Address = IPAddress.Parse("127.0.0.1") },
+                };
+                _client.UpdateHost(hosts);
             }
         }
     }
