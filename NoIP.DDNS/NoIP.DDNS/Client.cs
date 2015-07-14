@@ -112,7 +112,7 @@ namespace NoIP.DDNS
             if (hosts.Any(x => x.Address.AddressFamily != AddressFamily.InterNetwork))
                 throw new ArgumentException("Unsupport address version.");
 
-            IDictionary<string, UpdateStatus> response;
+            IDictionary<string, UpdateStatus> response = new Dictionary<string, UpdateStatus>();
 
             using (var client = new WebClient())
             {
@@ -125,10 +125,7 @@ namespace NoIP.DDNS
                     var updateUri = String.Format(UPDATE_URL_SECURE, Id, hostQueryString, hostGrouping.Key);
                     updateUri += String.Format("&pass={0}", GenerateQueryStringPassword(updateUri));
                     var rawResponse = client.DownloadString(updateUri);
-
-                    //TODO: negatives
-
-                    response = ParseUpdateResponse(rawResponse);
+                    response.Merge(ParseUpdateResponse(rawResponse));
                 }
             }
 
@@ -149,14 +146,23 @@ namespace NoIP.DDNS
             client.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
             client.Headers = new WebHeaderCollection 
                 {
-                    {HttpRequestHeader.UserAgent, UserAgent.ToString()},
+                    {HttpRequestHeader.UserAgent, UserAgent.ToString()}
                 };
         }
 
-        private IDictionary<string, UpdateStatus> ParseUpdateResponse(string response)
+        private static IDictionary<string, UpdateStatus> ParseUpdateResponse(string response)
         {
-            //TODO: Implement this.
-            return null;
+            var results = new Dictionary<string,UpdateStatus>();
+            foreach (var hostStatus in response.Trim()
+                                               .Split('\n')
+                                               .Select(status => status.Split(':')))
+            {
+                if (results.ContainsKey(hostStatus[0]))
+                    results[hostStatus[0]] = (UpdateStatus) Convert.ToInt32(hostStatus[1]);
+                else
+                    results.Add(hostStatus[0], (UpdateStatus) Convert.ToInt32(hostStatus[1]));
+            }
+            return results;
         }
     }
 }
