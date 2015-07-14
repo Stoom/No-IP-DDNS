@@ -14,7 +14,7 @@ namespace NoIP.DDNS.Exceptions
     [Serializable]
     public class UpdateException : NoIpException, ISerializable
     {
-        private readonly Dictionary<string, UpdateStatus> _hostsStatus;
+        private readonly IDictionary<string, UpdateStatus> _hostsStatus;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateException"/> class.
@@ -45,7 +45,7 @@ namespace NoIP.DDNS.Exceptions
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="hostsStatus">The hostsStatus.</param>
-        public UpdateException(string message, Dictionary<string, UpdateStatus> hostsStatus) : base(message)
+        public UpdateException(string message, IDictionary<string, UpdateStatus> hostsStatus) : base(message)
         {
             _hostsStatus = hostsStatus;
         }
@@ -56,7 +56,7 @@ namespace NoIP.DDNS.Exceptions
         /// <param name="message">The message.</param>
         /// <param name="hostsStatus">The hostsStatus.</param>
         /// <param name="innerException">The inner exception.</param>
-        public UpdateException(string message, Dictionary<string, UpdateStatus> hostsStatus, Exception innerException) : base(message, innerException)
+        public UpdateException(string message, IDictionary<string, UpdateStatus> hostsStatus, Exception innerException) : base(message, innerException)
         {
             _hostsStatus = hostsStatus;
         }
@@ -69,7 +69,7 @@ namespace NoIP.DDNS.Exceptions
         /// <exception></exception>
         protected UpdateException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            _hostsStatus = info.GetValue("HostStatus", typeof (Dictionary<string, UpdateStatus>)) as Dictionary<string, UpdateStatus>;
+            _hostsStatus = info.GetValue("HostStatus", typeof (IDictionary<string, UpdateStatus>)) as Dictionary<string, UpdateStatus>;
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace NoIP.DDNS.Exceptions
         /// <summary>
         /// Gets the HostStatus.
         /// </summary>
-        public Dictionary<string, UpdateStatus> HostStatus
+        public IDictionary<string, UpdateStatus> HostStatus
         {
             get { return _hostsStatus; }
         }

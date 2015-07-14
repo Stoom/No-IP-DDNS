@@ -32,6 +32,15 @@ namespace NoIP.DDNS
 
         protected Dictionary<Zone, HashSet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>();
 
+        private readonly HashSet<UpdateStatus> _validStatuses = new HashSet<UpdateStatus>
+        {
+            UpdateStatus.IpCurrent,
+            UpdateStatus.Success,
+            UpdateStatus.HostRedirectUpdated,
+            UpdateStatus.GroupUpdateSuccess,
+            UpdateStatus.GroupIsCurrent
+        };
+
         private readonly HashSet<UpdateStatus> _invalidLookupStatuses = new HashSet<UpdateStatus>
         {
             UpdateStatus.InvalidUserName, 
@@ -147,6 +156,8 @@ namespace NoIP.DDNS
                 throw new InvalidLoginException();
             if (responseStatuses.Intersect(_authentationStatuses).Any())
                 throw new AuthenticationException();
+            if (responseStatuses.Except(_validStatuses).Any())
+                throw new UpdateException("Host(s) update failed.", response);
         }
 
         protected string GenerateQueryStringPassword(string url)
