@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Fakes;
 using Microsoft.QualityTools.Testing.Fakes;
@@ -124,6 +125,36 @@ namespace NoIP.DDNS.Test
                     new Host("host2") { Address = IPAddress.Parse("127.0.0.1") },
                 };
                 _client.UpdateHost(hosts);
+            }
+        }
+
+        [TestMethod]
+        public void UpdateMultipleNonExistingHostsAndThrowUpdateException()
+        {
+            _client.Id = _noipClientId;
+            _client.Key = _noipClientKey;
+
+            Assert.IsTrue(_client.IsRegistered);
+
+            using (ShimsContext.Create())
+            {
+                ShimWebClient.AllInstances.DownloadStringString = (client, s) => "host1:2\nhost2:2\n";
+
+                var hosts = new List<Host>
+                {
+                    new Host("host1") { Address = IPAddress.Parse("127.0.0.1") },
+                    new Host("host2") { Address = IPAddress.Parse("127.0.0.1") },
+                };
+
+                var ex = AssertExtensions.ExpectedException<UpdateException>(() => _client.UpdateHost(hosts));
+
+                var expectedResults = new Dictionary<string, UpdateStatus>
+                {
+                    {"host1", UpdateStatus.HostNameDoesNotExist},
+                    {"host2", UpdateStatus.HostNameDoesNotExist}
+                };
+
+                Assert.IsTrue(expectedResults.SequenceEqual(ex.HostStatus));
             }
         }
     }
