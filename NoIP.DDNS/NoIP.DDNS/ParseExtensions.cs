@@ -18,6 +18,7 @@ namespace NoIP.DDNS
 
         public static T ParseXml<T>(this string value) where T : class
         {
+            //TODO: Switch to DataContracts and make responses internal
             var reader = XmlReader.Create(value.Trim().ToStream(), 
                                           new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Auto });
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;

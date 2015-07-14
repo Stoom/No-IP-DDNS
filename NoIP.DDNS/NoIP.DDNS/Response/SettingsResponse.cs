@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using NoIP.DDNS.DTO;
 
 namespace NoIP.DDNS.Response
 {
+    [Browsable(false)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [Serializable, XmlRoot("noip_host_list")]
     public class SettingsResponse
     {
@@ -17,6 +20,8 @@ namespace NoIP.DDNS.Response
         public string Webserver { get; set; }
     }
 
+    [Browsable(false)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [Serializable, XmlRoot("domain")]
     public class NoipHostListDomain
     {
@@ -28,6 +33,8 @@ namespace NoIP.DDNS.Response
         public ZoneType Type { get; set; }
     }
 
+    [Browsable(false)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [Serializable, XmlRoot("host")]
     public class NoipHostListDomainHost
     {

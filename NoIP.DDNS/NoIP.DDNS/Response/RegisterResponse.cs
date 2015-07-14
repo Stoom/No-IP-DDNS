@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace NoIP.DDNS.Response
 {
+    [Browsable(false)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [Serializable, XmlRoot("client")]
     public class RegisterResponse
     {
