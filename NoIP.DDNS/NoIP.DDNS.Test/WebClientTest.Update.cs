@@ -104,5 +104,27 @@ namespace NoIP.DDNS.Test
                 _client.UpdateHost(hosts);
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(AuthenticationException))]
+        public void UpdateMultipleHostsWithTempDisabledClientIdAndThrowAuthenticationException()
+        {
+            _client.Id = _noipClientId;
+            _client.Key = _noipClientKey;
+
+            Assert.IsTrue(_client.IsRegistered);
+
+            using (ShimsContext.Create())
+            {
+                ShimWebClient.AllInstances.DownloadStringString = (client, s) => ":98";
+
+                var hosts = new List<Host>
+                {
+                    new Host("host1") { Address = IPAddress.Parse("127.0.0.1") },
+                    new Host("host2") { Address = IPAddress.Parse("127.0.0.1") },
+                };
+                _client.UpdateHost(hosts);
+            }
+        }
     }
 }
