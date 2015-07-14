@@ -10,7 +10,7 @@ namespace NoIP.DDNS.Exceptions
     /// thus it does not implement ISerializable.
     /// </remarks>
     [Serializable]
-    public class InvalidLoginException : Exception
+    public class InvalidLoginException : AuthenticationException
     {
         //TODO: Change parent
         /// <summary>

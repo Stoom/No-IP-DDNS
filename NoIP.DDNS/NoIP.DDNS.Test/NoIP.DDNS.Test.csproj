@@ -57,11 +57,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AssertExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAgentTest.cs" />
     <Compile Include="WebClientTest.Credentials.cs" />
     <Compile Include="WebClientTest.cs" />
     <Compile Include="WebClientTest.Hosts.cs" />
+    <Compile Include="WebClientTest.Update.cs" />
     <Compile Include="WebClientTest.Zones.cs" />
   </ItemGroup>
   <ItemGroup>
