@@ -56,16 +56,11 @@ namespace NoIP.DDNS
 
         public void Register(string username, string password)
         {
-            //TODO: Refactor
-            using (var webClient = new WebClient())
+            using (var client = new WebClient())
             {
-                webClient.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
-                webClient.Headers = new WebHeaderCollection 
-                {
-                    {HttpRequestHeader.UserAgent, UserAgent.ToString()},
-                };
+                InitializeWebClient(client);
                 var registerUri = String.Format(REGISTER_URL_SECURE, Uri.EscapeDataString(username), Uri.EscapeDataString(password));
-                var rawResponse = webClient.DownloadString(registerUri);
+                var rawResponse = client.DownloadString(registerUri);
                 try
                 {
                     var response = rawResponse.ParseXml<RegisterResponse>();

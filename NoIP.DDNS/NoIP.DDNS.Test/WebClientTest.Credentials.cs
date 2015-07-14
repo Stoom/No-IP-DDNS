@@ -4,9 +4,9 @@
     // 'git update-index --assume-unchanged NoIP.DDNS.Test/WebClientTest.Credentials.cs'
     public partial class WebClientTest
     {
-        private string _noipUsername = "";
-        private string _noipPassword = "";
-        private string _noipClientId = "";
-        private string _noipClientKey = "";
+        private string _noipUsername = "fakeUser";
+        private string _noipPassword = "fakePassword";
+        private string _noipClientId = "CFakeClientId";
+        private string _noipClientKey = "fakekey";
     }
 }
