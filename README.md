@@ -7,13 +7,13 @@ A class library for accessing No-IP DNS hosts.
 [![Issues](https://img.shields.io/github/issues/Stoom/No-IP-DDNS.svg?style=flat-square)](https://github.com/Stoom/No-IP-DDNS/issues)
 
 ### Documentation
-MSDN style documentation can be found [here](http://docs.stumme.net/NoIp.DDNS/) or can be built via the RebuildClientDocs.bat script.
+MSDN style documentation can be found [Here](http://docs.stumme.net/NoIp.DDNS/) or can be built via the RebuildClientDocs.bat script.
 
 ### Ran into an bug?
 Before reporting it to us, please check out the [FAQ](https://github.com/Stoom/No-IP-DDNS/wiki/FAQ) to see if it is actually a bug. If you can not find anything related to your issue, feel free to report it to us in the issue tracker.
 
 #### Bug Reports
-Please read [this page](https://github.com/Stoom/No-IP-DDNS/wiki/About-Bug-Reports before submitting an issue.
+Please read [this page](https://github.com/Stoom/No-IP-DDNS/wiki/About-Bug-Reports) before submitting an issue.
 
 ### Breaking Changes
 None
