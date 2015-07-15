@@ -12,7 +12,6 @@ namespace NoIP.DDNS.Exceptions
     [Serializable]
     public class InvalidLoginException : AuthenticationException
     {
-        //TODO: Change parent
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidLoginException"/> class.
         /// </summary>
