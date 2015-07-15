@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace NoIP.DDNS
 {
-    public static class DictionaryExtensions
+    internal static class DictionaryExtensions
     {
         public static void Merge<TKey, TValue>(this IDictionary<TKey, TValue> value, IDictionary<TKey, TValue> merge)
         {
