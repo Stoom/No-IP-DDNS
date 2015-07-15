@@ -41,7 +41,7 @@
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>
     <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceContainer>True</RootNamespaceContainer>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>Guid</NamingMethod>
@@ -65,6 +65,10 @@
     <CatalogVersion>100</CatalogVersion>
     <CatalogProductId>VS</CatalogProductId>
     <VendorName>Stoom</VendorName>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="NoIP.DDNS" isDocumented="True" xmlns="">No-IP Dynamic DNS client.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NoIP.DDNS.DTO" isDocumented="True" xmlns="">Public DTOs for interactions with the No-IP Dynamic DNS client.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NoIP.DDNS.Exceptions" isDocumented="True" xmlns="">Exceptions thrown by No-IP Dynamic DNS client.</NamespaceSummaryItem></NamespaceSummaries>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
