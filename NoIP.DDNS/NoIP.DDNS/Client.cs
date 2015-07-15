@@ -12,16 +12,35 @@ using NoIP.DDNS.Response;
 
 namespace NoIP.DDNS
 {
+    /// <summary>
+    /// No-IP Dynamic DNS client.  The client manages all connections to the No-IP Servers.
+    /// </summary>
     public partial class Client
     {
+        /// <summary>
+        /// Useragent that is submitted to No-IP.  This will display on the client managment page.
+        /// </summary>
         public UserAgent UserAgent { get; set; }
+        /// <summary>
+        /// Boolean value to determine if the client is registered or not.  Client must be registered to preforme any task.
+        /// </summary>
         public Boolean IsRegistered
         {
             get { return !String.IsNullOrWhiteSpace(Id) && !String.IsNullOrWhiteSpace(Key); }
         }
+        /// <summary>
+        /// No-IP client id (aka "secure" username).
+        /// </summary>
         public String Id { get; set; }
+        /// <summary>
+        /// No-IP client key (aka "secure" password).
+        /// </summary>
         public String Key { get; set; }
 
+        /// <summary>
+        /// Constructs an instance of the No-IP Client.
+        /// </summary>
+        /// <param name="userAgent">Useragent of integrating program.</param>
         public Client(UserAgent userAgent)
         {
             if (userAgent == null)
@@ -30,6 +49,9 @@ namespace NoIP.DDNS
             UserAgent = userAgent;
         }
 
+        /// <summary>
+        /// Cached zones and hosts.
+        /// </summary>
         protected Dictionary<Zone, HashSet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>();
 
         private readonly HashSet<UpdateStatus> _validStatuses = new HashSet<UpdateStatus>
@@ -54,6 +76,14 @@ namespace NoIP.DDNS
             UpdateStatus.ClientIdTemporarilyDisabled
         };
 
+        /// <summary>
+        /// Registers the integrating assembly with the No-IP services.
+        /// </summary>
+        /// <param name="username">No-IP username/e-mail address.</param>
+        /// <param name="password">No-IP password.</param>
+        /// <exception cref="InvalidLoginException">Client ID or Key is incorrect.</exception>
+        /// <exception cref="UserBannedException">User has been banned on No-IP.</exception>
+        /// <exception cref="NoIpException">Unexpected error has occured.</exception>
         public void Register(string username, string password)
         {
             using (var client = new WebClient())
@@ -80,6 +110,11 @@ namespace NoIP.DDNS
             }
         }
 
+        /// <summary>
+        /// Gets a list of all zones (domains) registered to the user.
+        /// </summary>
+        /// <returns><see cref="ISet{Zone}"/> of all zones registed to user.</returns>
+        /// <exception cref="InvalidLoginException">Client ID or Key is incorrect.</exception>
         public ISet<Zone> GetZones()
         {
             SettingsResponse response;
@@ -109,17 +144,37 @@ namespace NoIP.DDNS
             return new HashSet<Zone>(CachedZonesAndHosts.Keys);
         }
 
+        /// <summary>
+        /// Gets a list of all hosts for a given zone.
+        /// </summary>
+        /// <param name="zone">Zone to get hosts for.</param>
+        /// <returns><see cref="ISet{T}"/> of all hosts in a given zone.</returns>
+        /// <exception cref="InvalidLoginException">Client ID or Key is incorrect.</exception>
         public ISet<Host> GetHosts(Zone zone)
         {
             GetZones();
             return CachedZonesAndHosts[zone];
         }
 
+        /// <summary>
+        /// Updates a given host to the new IP address.
+        /// </summary>
+        /// <param name="host">Given host to update.</param>
+        /// <exception cref="InvalidLoginException">Client ID or Key is incorrect.</exception>
+        /// <exception cref="AuthenticationException">Usually a client id has been disabled.</exception>
+        /// <exception cref="UpdateException">An error occured when updated the host not related to authentication.</exception>
         public void UpdateHost(Host host)
         {
             UpdateHost(new List<Host> { host });
         }
 
+        /// <summary>
+        /// Updates a given list of hosts to the new IP addresses.
+        /// </summary>
+        /// <param name="hosts"><see cref="IList{T}"/> of hosts to update.</param>
+        /// <exception cref="InvalidLoginException">Client ID or Key is incorrect.</exception>
+        /// <exception cref="AuthenticationException">Usually a client id has been disabled.</exception>
+        /// <exception cref="UpdateException">An error occured when updated the host not related to authentication.</exception>
         public void UpdateHost(IList<Host> hosts)
         {
             if (hosts == null || hosts.Count == 0)
@@ -155,6 +210,11 @@ namespace NoIP.DDNS
                 throw new UpdateException("Host(s) update failed.", response);
         }
 
+        /// <summary>
+        /// Generates the encrypted password to append to the end of a request URI.
+        /// </summary>
+        /// <param name="url">request URI without "&pass=" parameter.</param>
+        /// <returns><see cref="string"/> of the encrypted password.</returns>
         protected string GenerateQueryStringPassword(string url)
         {
             var uri = new Uri(url);
@@ -164,6 +224,10 @@ namespace NoIP.DDNS
             return Uri.EscapeDataString(string.Format("HMAC{{{0}}}", str.ToLowerInvariant()));
         }
 
+        /// <summary>
+        /// Sets common web client headers and options.
+        /// </summary>
+        /// <param name="client"><see cref="WebClient"/> used to make requests.</param>
         protected void InitializeWebClient(WebClient client)
         {
             client.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);

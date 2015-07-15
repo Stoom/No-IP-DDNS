@@ -3,12 +3,28 @@ using System.Net;
 
 namespace NoIP.DDNS.DTO
 {
+    /// <summary>
+    /// No-IP host record.
+    /// </summary>
     public class Host : IEquatable<Host>
     {
+        /// <summary>
+        /// Host's DNS name.
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Boolean if the DNS record is a whildcard (ie *.host.domain.com).
+        /// </summary>
         public bool Wildcard { get; set; }
+        /// <summary>
+        /// IP address of the host.
+        /// </summary>
         public IPAddress Address { get; set; }
 
+        /// <summary>
+        /// Creates an instance of a No-IP host record.
+        /// </summary>
+        /// <param name="hostName">Host's DNS name.</param>
         public Host(string hostName)
         {
             if (String.IsNullOrWhiteSpace(hostName))
@@ -17,6 +33,7 @@ namespace NoIP.DDNS.DTO
             Name = hostName;
         }
 
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             var hash = 0;
@@ -25,11 +42,13 @@ namespace NoIP.DDNS.DTO
             return hash;
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             return Equals(obj as Host);
         }
 
+        /// <inheritdoc />
         public bool Equals(Host other)
         {
             if (other == null)
