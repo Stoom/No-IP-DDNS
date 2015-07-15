@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace NoIP.DDNS
 {
+    /// <summary>
+    /// Generates a useragent for the No-IP client.
+    /// </summary>
     public sealed class UserAgent
     {
         private static readonly string LibraryName;
@@ -17,6 +20,9 @@ namespace NoIP.DDNS
             OsVersion = GenerateOsVersionString();
         }
 
+        /// <summary>
+        /// Name of implementing program.
+        /// </summary>
         public string ProgramName
         {
             set
@@ -29,6 +35,10 @@ namespace NoIP.DDNS
         
         private string _userAgent;
 
+        /// <summary>
+        /// Creates an instance of UserAgent.
+        /// </summary>
+        /// <param name="programName">Name of implementing program.</param>
         public UserAgent(string programName)
         {
             if (String.IsNullOrWhiteSpace(programName))
@@ -88,6 +98,7 @@ namespace NoIP.DDNS
             return String.Format("{0} {1}{2}", os, Environment.OSVersion.Version.ToString(2), wow);
         }
 
+        /// <inheritdoc />
         public override string ToString()
         {
             return _userAgent;

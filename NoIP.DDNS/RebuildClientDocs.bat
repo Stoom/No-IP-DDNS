@@ -1,0 +1,2 @@
+"C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" "NoIP.DDNS.sln" /t:Rebuild /p:Configuration=Release
+"C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" "NoIP.DDNS.Documentation.sln" /t:Rebuild /p:Configuration=Release
