@@ -10,10 +10,10 @@ A class library for accessing No-IP DNS hosts.
 Please build the sandcastel project for MSDN style documentation.  Once we get a web server setup we will be hosting the documentation online.
 
 ### Ran into an bug?
-Before reporting it to us, please check out the [FAQ](https://github.com/Stoom/) to see if it is actually a bug. If you can not find anything related to your issue, feel free to report it to us in the issue tracker.
+Before reporting it to us, please check out the [FAQ](https://github.com/Stoom/No-IP-DDNS/wiki/FAQ) to see if it is actually a bug. If you can not find anything related to your issue, feel free to report it to us in the issue tracker.
 
 #### Bug Reports
-Please read [this page](https://github.com/Stoom/) before submitting an issue.
+Please read [this page](https://github.com/Stoom/No-IP-DDNS/wiki/About-Bug-Reports before submitting an issue.
 
 ### Breaking Changes
 None
