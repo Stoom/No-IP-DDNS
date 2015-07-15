@@ -213,7 +213,7 @@ namespace NoIP.DDNS
         /// <summary>
         /// Generates the encrypted password to append to the end of a request URI.
         /// </summary>
-        /// <param name="url">request URI without "&pass=" parameter.</param>
+        /// <param name="url">request URI without "&amp;pass=" parameter.</param>
         /// <returns><see cref="string"/> of the encrypted password.</returns>
         protected string GenerateQueryStringPassword(string url)
         {
