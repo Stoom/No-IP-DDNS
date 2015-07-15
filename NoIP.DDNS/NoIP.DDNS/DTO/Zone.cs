@@ -2,6 +2,9 @@
 
 namespace NoIP.DDNS.DTO
 {
+    /// <summary>
+    /// No-IP zone record.
+    /// </summary>
     public class Zone : IEquatable<Zone>
     {
         /// <summary>
