@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="87c7e5f3-cadd-4c77-b4de-d1edca1b67f0" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+			<para>No-IP Dynamic DNS client library allows for simple access to the No-IP api.</para>
+		</introduction>
+
+		<section>
+			<title>Getting Started</title>
+			<content>
+				<para>To get started, add the NoIP.DDNS nuget package.</para>
+			</content>
+		</section>
+
+		<relatedTopics>
+			<link xlink:href="ba909cfc-6529-489c-83ec-7fcfb750f646" />
+		</relatedTopics>
+	</developerConceptualDocument>
+</topic>
