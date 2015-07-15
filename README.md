@@ -19,8 +19,33 @@ Please read [this page](https://github.com/Stoom/) before submitting an issue.
 None
 
 ### A short How To
-'''csharp
+Generate UserAgent
+```csharp
+var userAgent = new UserAgent("ProgramName");
+```
 
+Register client (Only do this once and store the client.Id and client.Key encrypted)
+```csharp
+var client = new NoIP.DDNS.Client(userAgent);
+client.Register("username", "password");
+```
+
+Get zones
+```csharp
+var zones = client.GetZones();
+```
+
+Get hosts in specified zone
+```csharp
+var hosts = client.GetHosts(zone);
+```
+
+Update host IP address
+```csharp
+var host = hosts.where(x => x.Name = "HostToChange");
+host.Address = IPAddress.Parse("127.0.0.1");
+client.UpdateHost(host);
+```
 
 ### Contributions
 
