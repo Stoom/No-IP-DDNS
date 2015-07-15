@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## No-IP.DDNS
 A class library for accessing No-IP DNS hosts.
 
@@ -51,7 +50,3 @@ client.UpdateHost(host);
 ### Contributions
 
 If you've improved MahApps.Metro and think that other people would enjoy it, submit a pull request.
-=======
-# No-IP-DDNS
-No-IP Dynamic DNS client library
->>>>>>> parent of 0e78e5f... Added XML doc to project and started README.md
