@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace NoIP.DDNS
 {
+    /// <summary>
+    /// Generates a useragent for the No-IP client.
+    /// </summary>
     public sealed class UserAgent
     {
         private static readonly string LibraryName;

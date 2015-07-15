@@ -1,5 +1,8 @@
 ﻿namespace NoIP.DDNS
 {
+    /// <summary>
+    /// List of host(s) update statuses.
+    /// </summary>
     public enum UpdateStatus
     {
         /// <summary>

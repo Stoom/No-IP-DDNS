@@ -1,5 +1,8 @@
 ﻿namespace NoIP.DDNS.DTO
 {
+    /// <summary>
+    /// Levels of service for a zone.
+    /// </summary>
     public enum ZoneType
     {
         /// <summary>
