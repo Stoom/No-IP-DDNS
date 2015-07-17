@@ -31,6 +31,10 @@
     <DocumentationFile>bin\Release\NoIP.DDNS.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ARSoft.Tools.Net, Version=2.1.0.0, Culture=neutral, PublicKeyToken=1940454cd762ec57, processorArchitecture=MSIL">
+      <HintPath>..\packages\ARSoft.Tools.Net.2.1.4\lib\net45\ARSoft.Tools.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +47,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="Client.NoIpUri.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="DnsResolver.cs" />
     <Compile Include="DTO\Host.cs" />
     <Compile Include="DTO\Zone.cs" />
     <Compile Include="Exceptions\AuthenticationException.cs" />
@@ -61,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="NoIP.DDNS.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
