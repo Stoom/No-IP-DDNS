@@ -27,7 +27,7 @@ namespace NoIP.DDNS
         public IPAddress Resolve(string dnsHostName)
         {
             var dnsResponse = _client.Resolve(dnsHostName);
-            if (dnsResponse == null || (dnsResponse.ReturnCode != ReturnCode.NoError && dnsResponse.ReturnCode != ReturnCode.NxDomain))
+            if (dnsResponse == null || (dnsResponse.ReturnCode != ReturnCode.NoError))
                 return null;
             var record = dnsResponse.AnswerRecords.First() as ARecord;
             return (record != null) ? record.Address : null;
