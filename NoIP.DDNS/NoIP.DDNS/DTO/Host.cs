@@ -39,6 +39,7 @@ namespace NoIP.DDNS.DTO
             var hash = 0;
             hash ^= Name.GetHashCode();
             hash ^= Wildcard.GetHashCode();
+            hash ^= (Address != null) ? Address.GetHashCode() : 0;
             return hash;
         }
 
@@ -57,6 +58,7 @@ namespace NoIP.DDNS.DTO
             var equals = true;
             equals &= Name.Equals(other.Name);
             equals &= Wildcard.Equals(other.Wildcard);
+            equals &= Address.Equals(other.Address);
             return equals;
         }
     }
