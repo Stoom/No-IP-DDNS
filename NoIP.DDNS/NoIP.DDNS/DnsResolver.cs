@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using ARSoft.Tools.Net.Dns;
 
@@ -6,12 +7,21 @@ namespace NoIP.DDNS
 {
     public class DnsResolver
     {
+        private const int QUERY_TIMEOUT = 10000;
 
-        private DnsClient _client;
+        private readonly DnsClient _client;
 
         public DnsResolver()
         {
             _client = DnsClient.Default;
+        }
+
+        public DnsResolver(IPAddress remoteDnsServerAddress)
+        {
+            if  (remoteDnsServerAddress == null)
+                throw new ArgumentNullException("remoteDnsServerAddress");
+
+            _client = new DnsClient(remoteDnsServerAddress, QUERY_TIMEOUT);
         }
 
         public IPAddress Resolve(string dnsHostName)
