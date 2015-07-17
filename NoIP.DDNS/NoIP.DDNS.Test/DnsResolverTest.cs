@@ -68,5 +68,28 @@ namespace NoIP.DDNS.Test
                 Assert.AreEqual(expectedResults, address);
             }
         }
+
+        [TestMethod]
+        public void ResolveBadHsotFromLocalDnsServerAndReturnNull()
+        {
+            const string host = "host1.notadomain.com";
+            
+            using (ShimsContext.Create())
+            {
+                ShimDnsClient.AllInstances.ResolveStringRecordTypeRecordClass = (dnsClient, s, arg3, arg4) => new DnsMessage
+                {
+                    IsEDnsEnabled = true,
+                    IsRecursionAllowed = true,
+                    IsRecursionDesired = true,
+                    ReturnCode = ReturnCode.NxDomain,
+                    AnswerRecords = new List<DnsRecordBase>()
+                };
+
+                var client = new DnsResolver();
+                var address = client.Resolve(host);
+
+                Assert.IsNull(address);
+            }
+        }
     }
 }
