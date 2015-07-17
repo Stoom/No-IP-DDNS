@@ -6,9 +6,12 @@ using System.Net.Cache;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+using ARSoft.Tools.Net.Dns;
 using NoIP.DDNS.DTO;
 using NoIP.DDNS.Exceptions;
 using NoIP.DDNS.Response;
+using Zone = NoIP.DDNS.DTO.Zone;
 
 namespace NoIP.DDNS
 {
@@ -36,6 +39,8 @@ namespace NoIP.DDNS
         /// No-IP client key (aka "secure" password).
         /// </summary>
         public String Key { get; set; }
+
+        public DnsResolveMode ResolveDns { get; set; }
 
         /// <summary>
         /// Constructs an instance of the No-IP Client.
@@ -153,6 +158,14 @@ namespace NoIP.DDNS
         public ISet<Host> GetHosts(Zone zone)
         {
             GetZones();
+            var hosts = CachedZonesAndHosts[zone];
+
+            DnsResolver resolver = new DnsResolver();
+            Parallel.ForEach(hosts, host =>
+            {
+                host.Address = resolver.Resolve(host.Name);
+            });
+
             return CachedZonesAndHosts[zone];
         }
 
