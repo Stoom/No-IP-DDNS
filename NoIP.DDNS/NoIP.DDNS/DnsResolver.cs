@@ -20,7 +20,7 @@ namespace NoIP.DDNS
         public static readonly IPAddress GooglePublicDns2 = IPAddress.Parse("8.8.4.4");
 
         /// <summary>
-        /// Timeout for each query request.
+        /// Timeout for each query request. Defaults to 10 seconds.
         /// </summary>
         public int QueryTimeout {
             get { return _queryTimeout; }
