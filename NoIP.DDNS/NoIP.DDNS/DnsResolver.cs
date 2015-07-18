@@ -16,12 +16,12 @@ namespace NoIP.DDNS
             _client = DnsClient.Default;
         }
 
-        public DnsResolver(IPAddress remoteDnsServerAddress)
+        public DnsResolver(params IPAddress[] remoteDnsServerAddress)
         {
             if  (remoteDnsServerAddress == null)
                 throw new ArgumentNullException("remoteDnsServerAddress");
 
-            _client = new DnsClient(remoteDnsServerAddress, QUERY_TIMEOUT);
+            _client = new DnsClient(remoteDnsServerAddress.ToList(), QUERY_TIMEOUT);
         }
 
         public IPAddress Resolve(string dnsHostName)
