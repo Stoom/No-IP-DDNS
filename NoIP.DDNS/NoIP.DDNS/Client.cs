@@ -39,6 +39,9 @@ namespace NoIP.DDNS
         public String Key { get; set; }
 
         //TODO: Refactor to IoC
+        /// <summary>
+        /// Method to resolve No-IP host addresses
+        /// </summary>
         public DnsResolveMode ResolveDns
         {
             get { return _resolveDns; }
