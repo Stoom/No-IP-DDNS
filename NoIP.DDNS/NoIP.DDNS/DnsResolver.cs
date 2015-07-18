@@ -19,9 +19,16 @@ namespace NoIP.DDNS
         /// </summary>
         public static readonly IPAddress GooglePublicDns2 = IPAddress.Parse("8.8.4.4");
 
-        private const int QUERY_TIMEOUT = 10000;
+        /// <summary>
+        /// Timeout for each query request.
+        /// </summary>
+        public int QueryTimeout {
+            get { return _queryTimeout; }
+            set { _queryTimeout = value; }
+        }
 
         private readonly DnsClient _client;
+        private int _queryTimeout = 10000;
 
         /// <summary>
         /// Creates a new instance of DnsResolver that resolves against the local DNS servers.
@@ -40,7 +47,7 @@ namespace NoIP.DDNS
             if  (remoteDnsServerAddress == null)
                 throw new ArgumentNullException("remoteDnsServerAddress");
 
-            _client = new DnsClient(remoteDnsServerAddress.ToList(), QUERY_TIMEOUT);
+            _client = new DnsClient(remoteDnsServerAddress.ToList(), QueryTimeout);
         }
 
         /// <summary>
