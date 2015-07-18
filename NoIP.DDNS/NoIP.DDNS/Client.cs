@@ -38,31 +38,10 @@ namespace NoIP.DDNS
         /// </summary>
         public String Key { get; set; }
 
-        //TODO: Refactor to IoC
         /// <summary>
-        /// Method to resolve No-IP host addresses
+        /// Dns resolver to resolve No-IP host addresses.
         /// </summary>
-        public DnsResolveMode ResolveDns
-        {
-            get { return _resolveDns; }
-            set
-            {
-                switch (value)
-                {
-                    case DnsResolveMode.Local:
-                        _dnsResolver = new DnsResolver();
-                        break;
-                    case DnsResolveMode.Remote:
-                        _dnsResolver = new DnsResolver(IPAddress.Parse("8.8.8.8"),
-                                                       IPAddress.Parse("8.8.4.4"));
-                        break;
-                    default:
-                        _dnsResolver = null;
-                        break;
-                }
-                _resolveDns = value;
-            }
-        }
+        public DnsResolver Dns;
 
         /// <summary>
         /// Constructs an instance of the No-IP Client.
@@ -80,9 +59,6 @@ namespace NoIP.DDNS
         /// Cached zones and hosts.
         /// </summary>
         protected Dictionary<Zone, HashSet<Host>> CachedZonesAndHosts = new Dictionary<Zone, HashSet<Host>>();
-
-        private DnsResolveMode _resolveDns = DnsResolveMode.None;
-        private DnsResolver _dnsResolver;
 
         private readonly HashSet<UpdateStatus> _validStatuses = new HashSet<UpdateStatus>
         {
@@ -185,12 +161,11 @@ namespace NoIP.DDNS
             GetZones();
             var hosts = CachedZonesAndHosts[zone];
 
-            if (ResolveDns == DnsResolveMode.Local ||
-                ResolveDns == DnsResolveMode.Remote)
+            if (Dns != null)
             {
                 Parallel.ForEach(hosts, host =>
                 {
-                    host.Address = _dnsResolver.Resolve(host.Name);
+                    host.Address = Dns.Resolve(host.Name);
                 });
             }
 

@@ -102,7 +102,7 @@ namespace NoIP.DDNS.Test
                     }
                 };
 
-                _client.ResolveDns = DnsResolveMode.Local;
+                _client.Dns = new DnsResolver();
                 var zones = _client.GetZones();
                 var results = _client.GetHosts(zones.First());
 
@@ -125,6 +125,8 @@ namespace NoIP.DDNS.Test
             Assert.IsTrue(_client.IsRegistered);
 
             const string shimAddress = "127.0.0.1";
+            var googleDns1 = IPAddress.Parse("8.8.8.8");
+            var googleDns2 = IPAddress.Parse("8.8.4.4");
 
             using (ShimsContext.Create())
             {
@@ -171,7 +173,7 @@ namespace NoIP.DDNS.Test
                     }
                 };
 
-                _client.ResolveDns = DnsResolveMode.Remote;
+                _client.Dns = new DnsResolver(googleDns1, googleDns2);
                 var zones = _client.GetZones();
                 var results = _client.GetHosts(zones.First());
 

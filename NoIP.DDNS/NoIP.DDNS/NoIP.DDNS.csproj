@@ -47,7 +47,6 @@
     <Compile Include="Client.cs" />
     <Compile Include="Client.NoIpUri.cs" />
     <Compile Include="DictionaryExtensions.cs" />
-    <Compile Include="DnsResolveMode.cs" />
     <Compile Include="DnsResolver.cs" />
     <Compile Include="DTO\Host.cs" />
     <Compile Include="DTO\Zone.cs" />
