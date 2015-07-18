@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
     <id>NoIP.DDNS</id>
-    <version>1.0.0.1</version>
+    <version>1.1.0.1</version>
     <title>NoIP.DDNS</title>
     <authors>Stoom</authors>
     <owners>James Stumme</owners>
