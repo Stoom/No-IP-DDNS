@@ -7,11 +7,9 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using ARSoft.Tools.Net.Dns;
 using NoIP.DDNS.DTO;
 using NoIP.DDNS.Exceptions;
 using NoIP.DDNS.Response;
-using Zone = NoIP.DDNS.DTO.Zone;
 
 namespace NoIP.DDNS
 {

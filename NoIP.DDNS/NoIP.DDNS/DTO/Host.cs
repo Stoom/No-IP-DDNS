@@ -58,7 +58,7 @@ namespace NoIP.DDNS.DTO
             var equals = true;
             equals &= Name.Equals(other.Name);
             equals &= Wildcard.Equals(other.Wildcard);
-            equals &= Address.Equals(other.Address);
+            equals &= (Address != null) ? Address.Equals(other.Address) : Equals(Address, other.Address);
             return equals;
         }
     }
