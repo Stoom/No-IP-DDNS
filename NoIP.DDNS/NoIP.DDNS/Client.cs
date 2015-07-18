@@ -41,7 +41,7 @@ namespace NoIP.DDNS
         /// <summary>
         /// Dns resolver to resolve No-IP host addresses.
         /// </summary>
-        public DnsResolver Dns;
+        public DnsResolver Dns { get; set; }
 
         /// <summary>
         /// Constructs an instance of the No-IP Client.
