@@ -50,9 +50,10 @@
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <ApiFilter>
       <Filter entryType="Namespace" fullName="NoIP.DDNS.Response" isExposed="False" />
-<Filter entryType="Namespace" fullName="System" isExposed="True">
-  <Filter entryType="Class" fullName="System.Object" filterName="Object" isExposed="False" />
-</Filter></ApiFilter>
+      <Filter entryType="Namespace" fullName="System" isExposed="True">
+        <Filter entryType="Class" fullName="System.Object" filterName="Object" isExposed="False" />
+      </Filter>
+    </ApiFilter>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected</VisibleItems>
     <ComponentConfigurations>
     </ComponentConfigurations>
@@ -99,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\VersionHistory\v1.0.0.0.aml" />
+    <None Include="Content\VersionHistory\v1.1.0.0.aml" />
     <None Include="Content\VersionHistory\VersionHistory.aml" />
     <None Include="Content\Welcome.aml" />
   </ItemGroup>
