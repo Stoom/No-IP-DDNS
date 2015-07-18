@@ -10,6 +10,15 @@ namespace NoIP.DDNS
     /// </summary>
     public class DnsResolver
     {
+        /// <summary>
+        /// Google primary public DNS server IP address.
+        /// </summary>
+        public static readonly IPAddress GooglePublicDns1 = IPAddress.Parse("8.8.8.8");
+        /// <summary>
+        /// Google secondary public DNS server IP address.
+        /// </summary>
+        public static readonly IPAddress GooglePublicDns2 = IPAddress.Parse("8.8.4.4");
+
         private const int QUERY_TIMEOUT = 10000;
 
         private readonly DnsClient _client;
