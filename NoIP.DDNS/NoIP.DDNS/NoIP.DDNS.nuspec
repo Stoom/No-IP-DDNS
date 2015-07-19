@@ -16,6 +16,6 @@
     <copyright>Copyright ©  2015</copyright>
   </metadata>
   <files>
-    <file src="C:\Users\James\Source\Repos\No-IP DDNS\NoIP.DDNS\NoIP.DDNS\bin\Release\NoIP.DDNS.dll" target="lib\net45" />
+    <file src="C:\Users\James\Source\Repos\No-IP DDNS\NoIP.DDNS\NoIP.DDNS\bin\Deploy\NoIP.DDNS.dll" target="lib\net45" />
   </files>
 </package>

@@ -31,6 +31,16 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\NoIP.DDNS.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy|AnyCPU'">
+    <OutputPath>bin\Deploy\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\NoIP.DDNS.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ARSoft.Tools.Net, Version=2.1.0.0, Culture=neutral, PublicKeyToken=1940454cd762ec57, processorArchitecture=MSIL">
       <HintPath>..\packages\ARSoft.Tools.Net.2.1.4\lib\net45\ARSoft.Tools.Net.dll</HintPath>
@@ -87,20 +97,11 @@
   -->
   <!-- ILRepack -->
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">
-
     <ItemGroup>
       <InputAssemblies Include="$(OutputPath)\NoIP.DDNS.dll" />
       <InputAssemblies Include="$(OutputPath)\ARSoft.Tools.Net.dll" />
     </ItemGroup>
-
-    <ILRepack
-     Parallel="true"
-     Internalize="true"
-     InputAssemblies="@(InputAssemblies)"
-     TargetKind="Dll"
-     OutputFile="$(OutputPath)\$(AssemblyName).dll"
-   />
-
+    <ILRepack Parallel="true" Internalize="true" InputAssemblies="@(InputAssemblies)" TargetKind="Dll" OutputFile="$(OutputPath)\$(AssemblyName).dll" />
   </Target>
   <!-- /ILRepack -->
 </Project>
