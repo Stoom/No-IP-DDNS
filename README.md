@@ -18,7 +18,7 @@ Please read [this page](https://github.com/Stoom/No-IP-DDNS/wiki/About-Bug-Repor
 ### Breaking Changes
 None
 
-### A short How To
+### A Short How To
 Generate UserAgent
 ```csharp
 var userAgent = new UserAgent("ProgramName");
@@ -28,6 +28,11 @@ Register client (Only do this once and store the client.Id and client.Key encryp
 ```csharp
 var client = new Client(userAgent);
 client.Register("username", "password");
+```
+
+Enable host address resolution
+```csharp
+client.Dns = new DnsResolver();
 ```
 
 Get zones
