@@ -49,4 +49,4 @@ client.UpdateHost(host);
 
 ### Contributions
 
-If you've improved MahApps.Metro and think that other people would enjoy it, submit a pull request.
+If you've improved NoIP.DDNS and think that other people would enjoy it, submit a pull request.
