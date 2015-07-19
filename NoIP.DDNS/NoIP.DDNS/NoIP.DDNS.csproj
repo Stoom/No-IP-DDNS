@@ -4,7 +4,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <AppVeyor Condition="'$(AppVeyor)' == ''">Local</AppVeyor>
     <ProjectGuid>{D82B2AA1-901C-418A-970F-B6445A1E5033}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -87,7 +86,7 @@
   </Target>
   -->
   <!-- ILRepack -->
-  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
+  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">
 
     <ItemGroup>
       <InputAssemblies Include="$(OutputPath)\NoIP.DDNS.dll" />
